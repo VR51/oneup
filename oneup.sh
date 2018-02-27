@@ -13,7 +13,7 @@ clear
 #
 #	Lead Author: Lee Hodson
 #	Donate: https://paypal.me/vr51
-#	Website: https://journalxtra.com/gaming/oneup/
+#	Website: https://journalxtra.com/gaming/mame-qmc2-installer/
 #	This Release: 27th Feb. 2018
 #	First Written: 27th Feb. 2018
 #	First Release: 27th Feb. 2018
