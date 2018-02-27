@@ -157,9 +157,9 @@ function oneup_prompt() {
 	printf $normal
 
 		if [ ${conf[1]} == 0 ]; then
-			printf "\nYes, delete old source files before action is committed."
-		else
 			printf "\nNo, do not delete old source files before action is committed."
+		else
+			printf "\nYes, delete old source files before action is committed."
 		fi
 
 		let cores=${conf[2]}-1
