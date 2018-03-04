@@ -439,7 +439,7 @@ function oneup_prompt() {
 
 		;;
 		
-		5) # CPU Cores to Use
+		5) # Parallel jobs to run during build
 		
 			case "${conf[2]}" in
 			
