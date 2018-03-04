@@ -11,7 +11,7 @@ Tested With: Ubuntu flavours
 - Lead Author: Lee Hodson
 - Donate: https://paypal.me/vr51
 - Website: https://journalxtra.com/gaming/mame-qmc2-installer/
-- This Release: 27th Feb. 2018
+- This Release: 4th Mar. 2018
 - First Written: 27th Feb. 2018
 - First Release: 27th Feb. 2018
 
@@ -25,14 +25,13 @@ Use of this program is at your own risk
 
 # USE TO:
 
-1) Install MAME from source
-2) Update MAME from source
-3) Install QMC2 from source
-4) Update QMC2 from source
-5) Update MAME default data files: artwork, bgfx, ctrlr, hash, keymaps, language, plugins, roms, samples.
-6) Create default output data directories: cfg nvram memcard inp sta snap diff comments
-7) Delete, or not, stale files before new files are downloaded. Option set affects only actions committed.
-8) Install packages required to successfully build MAME and QMC2. This option shows until used.
+1) Install/Update MAME from source (includes tools)
+2) Install/Update QMC2 from source (includes QMC2, QMC2 Arcade, QCHDMAN and the man help pages)
+3) Update MAME default data files: artwork, bgfx, ctrlr, hash, keymaps, language, plugins, roms and samples.
+4) Create default output data directories: cfg, nvram, memcard, inp, sta, snap, diff and comments
+5) Delete, or not, stale files before new files are downloaded. Option set affects only actions committed.
+6) Set the number of parallel jobs make should use during build process.
+7) Install packages required to successfully build MAME and QMC2. This option shows until used.
 
 # DETAILED INSTRCTIONS
 
@@ -70,4 +69,7 @@ Visit https://journalxtra.com/gaming/download-complete-sets-of-mess-and-mame-rom
 
 # CHANGE LOG
 
-- None yet
+## 1.0.1
+
+- New options
+- Redesigned code
