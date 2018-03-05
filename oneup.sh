@@ -81,6 +81,9 @@ group=$(id -g -n $user) # Current user's primary group
 # Internal Settings - These do not usually need to be manually changed
 
 declare -a conf
+declare -a menu # Menu options are set within oneup_prompt()
+declare -a message # Index indicates related conf, mode or menu item
+declare -a mode # Used for notices
 
 conf[0]=0 # Essentials # Install build essential software. 0 = Not done, 1 = Done
 conf[1]=2 # Clean Stale # Do no cleaning or run make clean or delete source files? 0/1/2. 0 = No, 1 = Soft, 2 = Hard.
@@ -91,8 +94,6 @@ conf[5]=$(grep 'INDEX - v' "/usr/local/share/qmc2/doc/html/us/index.html" | sed 
 
 
 ## END User Options
-
-declare -a menu # Menu options are set within oneup_prompt()
 
 let safeproc=${conf[3]}+${conf[3]} # Safe number of parallel jobs, possibly.
 
@@ -137,18 +138,21 @@ function oneup_prompt() {
 				message[1]='No cleaning'
 				menu[1]='Update MAME'
 				menu[2]='Update QMC2'
+				mode[1]='MODE: Update. Press 6 to change mode.'
 			;;
 
 			1)
-				message[1]='Clean Build Cache Only'
+				message[1]='Clean Compiler Cache'
 				menu[1]='Update MAME'
 				menu[2]='Update QMC2'
+				mode[1]='MODE: Update. Press 6 to change mode.'
 			;;
 
 			2)
 				message[1]='Delete Source Files'
 				menu[1]='Install MAME'
 				menu[2]='Install QMC2'
+				mode[1]='MODE: Install. Press 6 to change mode.'
 			;;
 
 		esac
@@ -181,11 +185,12 @@ function oneup_prompt() {
 			;;
 			
 		esac
-		
 
 		printf $bold
-		printf "MENU\n\n"
+		printf "${mode[1]}\n"
 		printf $normal
+		
+		printf "\nMENU\n\n"
 
 		n=1
 		for i in "${menu[@]}"; do
@@ -210,12 +215,11 @@ function oneup_prompt() {
 				
 			printf $normal
 
-			printf "\nRestart OneUp! if this looks wrong.\n"
-			printf "\nSystem MAME: ${conf[4]}"
-			printf "\nSystem QMC2: ${conf[5]}\n"
+			printf "\n System MAME: ${conf[4]}"
+			printf "\n System QMC2: ${conf[5]}\n"
 			
-			printf "\nIf you use QMC2 you will need to clean its software caches after any updates have been committed otherwise the QMC2 playable software lists and playable ROM lists will be out-of-date.\n"
-			printf "\nClear QMC2 software caches from QMC2 > Tools > Clean Up > Clear All Emulator Caches or launch QMC2 from the command line with$bold qmc2 -cc$normal\n"
+			printf "\nClean the QMC2 software caches after any updates have been committed otherwise the QMC2 playable software lists and playable ROM lists will be out-of-date.\n"
+			printf "\nUse QMC2 > Tools > Clean Up > Clear All Emulator Caches OR launch QMC2 from the command line with$bold qmc2 -cc$normal\n"
 
 		printf $bold
 			printf "\nChoose Wisely: "
@@ -292,6 +296,8 @@ function oneup_prompt() {
 			fi
 
 			sudo ldconfig
+			
+			conf[4]=$(mame -? | grep 'MAME v') # Newly installed MAME Version
 
 			printf "\nMAME is ready to use.\n"
 			printf "\nPress ANY key"
@@ -352,15 +358,17 @@ function oneup_prompt() {
 			# Build & install QMC2, QMC2 Arcade and QCHDMAN and man pages.
 			cd "$HOME/src/qmc2"
 
-			make -j${conf[2]} DISTCFG=1
-			sudo make $jobs install DISTCFG=1
-			make -j${conf[2]} arcade DISTCFG=1
-			sudo make $jobs arcade-install DISTCFG=1
-			make -j${conf[2]} qchdman DISTCFG=1
-			sudo make $jobs qchdman-install DISTCFG=1
-			make -j${conf[2]} man
-			sudo make $jobs man-install
+			make $jobs DISTCFG=1
+			sudo make install DISTCFG=1
+			make $jobs arcade DISTCFG=1
+			sudo make arcade-install DISTCFG=1
+			make $jobs qchdman DISTCFG=1
+			sudo make qchdman-install DISTCFG=1
+			make $jobs man
+			sudo make man-install
 			sudo ldconfig
+
+			conf[5]=$(grep 'INDEX - v' "/usr/local/share/qmc2/doc/html/us/index.html" | sed -E "s#[ ]{0,10}</?font.{0,10}>(INDEX - v)?##g") # Newly installed QMC2 Version
 
 			printf "\nQMC2 is ready to use.\n"
 			printf "\nPress ANY key"
