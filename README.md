@@ -73,3 +73,4 @@ Visit https://journalxtra.com/gaming/download-complete-sets-of-mess-and-mame-rom
 
 - New options
 - Redesigned code
+- Redesigned options layout
