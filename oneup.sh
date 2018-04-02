@@ -3,7 +3,7 @@ clear
 # set -x
 ###
 #
-#	OneUP! 1.0.1
+#	OneUP! 1.0.2
 #
 #	MAME and QMC2 installer & updater.
 #	Compiles both from source and installs the binaries and files to their expected locations.
@@ -14,9 +14,9 @@ clear
 #	Lead Author: Lee Hodson
 #	Donate: https://paypal.me/vr51
 #	Website: https://journalxtra.com/gaming/mame-qmc2-installer/
-#	This Release: 4th March. 2018
-#	First Written: 27th Feb. 2018
-#	First Release: 27th Feb. 2018
+#	This Release: 2nd Apr 2018
+#	First Written: 27th Feb 2018
+#	First Release: 27th Feb 2018
 #
 #	Copyright 2018 OneUP! <https://journalxtra.com>
 #	License: GPL3
@@ -280,6 +280,7 @@ function oneup_prompt() {
 			esac
 			
 			# Build MAME
+			cd "$HOME/src/mame"
 			make $jobs TOOLS=1
 
 			# Install MAME
