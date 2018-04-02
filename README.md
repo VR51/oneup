@@ -11,9 +11,9 @@ Tested With: Ubuntu flavours
 - Lead Author: Lee Hodson
 - Donate: https://paypal.me/vr51
 - Website: https://journalxtra.com/gaming/mame-qmc2-installer/
-- This Release: 4th Mar. 2018
-- First Written: 27th Feb. 2018
-- First Release: 27th Feb. 2018
+- This Release: 2nd Apr 2018
+- First Written: 27th Feb 2018
+- First Release: 27th Feb 2018
 
 Copyright 2018 OneUP! <https://journalxtra.com>
 
@@ -69,8 +69,10 @@ Visit https://journalxtra.com/gaming/download-complete-sets-of-mess-and-mame-rom
 
 # CHANGE LOG
 
-## 1.0.1
+## 1.0.2
+- MAME Installer/Updater bugfix. Had forgotten to CD to the correct build directory.
 
+## 1.0.1
 - New options
 - Redesigned code
 - Redesigned options layout
