@@ -3,7 +3,7 @@ clear
 # set -x
 ###
 #
-#	OneUP! 1.0.2
+#	OneUP! 1.0.3
 #
 #	MAME and QMC2 installer & updater.
 #	Compiles both from source and installs the binaries and files to their expected locations.
@@ -14,9 +14,9 @@ clear
 #	Lead Author: Lee Hodson
 #	Donate: https://paypal.me/vr51
 #	Website: https://journalxtra.com/gaming/mame-qmc2-installer/
-#	This Release: 2nd Apr 2018
-#	First Written: 27th Feb 2018
-#	First Release: 27th Feb 2018
+#	This Release: 2nd April. 2018
+#	First Written: 27th Feb. 2018
+#	First Release: 27th Feb. 2018
 #
 #	Copyright 2018 OneUP! <https://journalxtra.com>
 #	License: GPL3
@@ -240,7 +240,7 @@ function oneup_prompt() {
 				sudo chown -R $user:$group "$HOME/src/mame"
 				
 				# Decide whether to update or install
-				case $conf[1] in
+				case ${conf[1]} in
 				
 					0) # Update - No spring clean. Update source files
 						cd "$HOME/src/mame"
@@ -319,7 +319,7 @@ function oneup_prompt() {
 				sudo chown -R $user:$group "$HOME/src/qmc2"
 				
 				# Decide whether to update or install
-				case $conf[1] in
+				case ${conf[1]} in
 				
 					0) # Update. No spring clean. Update source files
 						cd "$HOME/src/qmc2"
@@ -389,7 +389,7 @@ function oneup_prompt() {
 
 				sudo chown -R $user:$group "$HOME/src/mame"
 
-				if [ $conf[1] == 1 ]; then
+				if [ ${conf[1]} == 1 ]; then
 
 					rm -r -f "$HOME/src/mame"
 					git clone "$mameloc"
