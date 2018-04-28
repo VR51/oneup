@@ -68,6 +68,10 @@ You will need game and arcade ROMs to use MAME enjoyably.
 Visit https://journalxtra.com/gaming/download-complete-sets-of-mess-and-mame-roms/ to find some.
 
 # CHANGE LOG
+## 1.0.4
+- QMC2 Installer: Fixed QMC2 download bug that occured when OneUp! was run in installer mode for the first time.
+- MAME Installer: Changed `git clone` to `git clone depth 1` to prevent download of unnecessary MAME source data. Thank you [i30817](https://github.com/i30817) for this suggestion.
+
 ## 1.0.3
 - Fixed variable call. Had forgotten to brace array variable ${conf[1]}. Resolves MAME update error.
 
