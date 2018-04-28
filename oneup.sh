@@ -3,7 +3,7 @@ clear
 # set -x
 ###
 #
-#	OneUP! 1.0.3
+#	OneUP! 1.0.4
 #
 #	MAME and QMC2 installer & updater.
 #	Compiles both from source and installs the binaries and files to their expected locations.
@@ -256,7 +256,7 @@ function oneup_prompt() {
 					
 					2) # Clean install. Delete source files. Download fresh source files.
 						rm -r -f "$HOME/src/mame"
-						git clone "$mameloc"
+						git git clone depth 1 "$mameloc"
 						cd "$HOME/src/mame"
 					;;
 					
@@ -264,7 +264,7 @@ function oneup_prompt() {
 
 			else
 				# Clean install necessary - Source files not present yet
-				git clone "$mameloc"
+				git git clone depth 1 "$mameloc"
 				cd "$HOME/src/mame"
 
 			fi
@@ -335,6 +335,7 @@ function oneup_prompt() {
 					
 					2) # Install. Delete existing source files. Download fresh source files.
 						rm -r -f "$HOME/src/qmc2"
+						mkdir "$HOME/src/qmc2"
 						svn co "$qmc2loc" qmc2
 					;;
 					
@@ -342,6 +343,7 @@ function oneup_prompt() {
 				
 			else
 				# Download fresh source files. Files do not not present yet.
+				mkdir "$HOME/src/qmc2"
 				svn co "$qmc2loc" qmc2
 
 			fi
@@ -392,7 +394,7 @@ function oneup_prompt() {
 				if [ ${conf[1]} == 1 ]; then
 
 					rm -r -f "$HOME/src/mame"
-					git clone "$mameloc"
+					git clone depth 1 "$mameloc"
 
 				else
 
@@ -403,7 +405,7 @@ function oneup_prompt() {
 
 			else
 
-				git clone "$mameloc"
+				git clone depth 1 "$mameloc"
 
 			fi
 
