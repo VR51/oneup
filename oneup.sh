@@ -256,7 +256,7 @@ function oneup_prompt() {
 					
 					2) # Clean install. Delete source files. Download fresh source files.
 						rm -r -f "$HOME/src/mame"
-						git git clone depth 1 "$mameloc"
+						git clone --depth 1 "$mameloc"
 						cd "$HOME/src/mame"
 					;;
 					
@@ -264,7 +264,7 @@ function oneup_prompt() {
 
 			else
 				# Clean install necessary - Source files not present yet
-				git git clone depth 1 "$mameloc"
+				git clone --depth 1 "$mameloc"
 				cd "$HOME/src/mame"
 
 			fi
@@ -394,7 +394,7 @@ function oneup_prompt() {
 				if [ ${conf[1]} == 1 ]; then
 
 					rm -r -f "$HOME/src/mame"
-					git clone depth 1 "$mameloc"
+					git clone --depth 1 "$mameloc"
 
 				else
 
@@ -405,7 +405,7 @@ function oneup_prompt() {
 
 			else
 
-				git clone depth 1 "$mameloc"
+				git clone --depth 1 "$mameloc"
 
 			fi
 
