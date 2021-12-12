@@ -2,7 +2,7 @@
 
 MAME and QMC2 Installer. Bash script to download MAME and QMC2 source files then build and install them.
 
-Compiles both from source and installs the binaries and files to their expected locations.
+Compiles both packages from their source files (downloaded afresh) and installs the compiled binaries and files to their expected locations.
 
 For OS: Linux
 
@@ -11,7 +11,7 @@ Tested With: Ubuntu flavours
 - Lead Author: Lee Hodson
 - Donate: https://paypal.me/vr51
 - Website: https://journalxtra.com/gaming/mame-qmc2-installer/
-- This Release: 27th Apr 2018
+- This Release: 12th Dec 2021
 - First Written: 27th Feb 2018
 - First Release: 27th Feb 2018
 
@@ -23,7 +23,7 @@ Programmer: Lee Hodson <journalxtra.com>, VR51 <vr51.com>
 
 Use of this program is at your own risk
 
-# USE TO:
+# USE THIS TO
 
 1) Install/Update MAME from source (includes tools)
 2) Install/Update QMC2 from source (includes QMC2, QMC2 Arcade, QCHDMAN and the man help pages)
@@ -68,6 +68,9 @@ You will need game and arcade ROMs to use MAME enjoyably.
 Visit https://journalxtra.com/gaming/download-complete-sets-of-mess-and-mame-roms/ to find some.
 
 # CHANGE LOG
+## 1.0.5
+- Adjusted the list of software installed prerequisite to installation of MAME or QMC2
+
 ## 1.0.4
 - QMC2 Installer: Fixed QMC2 download bug that occured when OneUp! was run in installer mode for the first time.
 - MAME Installer: Changed `git clone` to `git clone depth 1` to prevent download of unnecessary MAME source data. Thank you [i30817](https://github.com/i30817) for this suggestion.
