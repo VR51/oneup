@@ -3,10 +3,11 @@ clear
 # set -x
 ###
 #
-#	OneUP! 1.0.4
+#	OneUP! 1.0.5
 #
-#	MAME and QMC2 installer & updater.
+#	MAME and QMC2 installer & updater for Debian, Ubuntu, Raspberry Pi and ODROID.
 #	Compiles both from source and installs the binaries and files to their expected locations.
+# See here for other distros' MAME installation guides https://docs.mamedev.org/initialsetup/compilingmame.html
 #
 #	For OS: Linux
 #	Tested With: Ubuntu flavours
@@ -14,7 +15,7 @@ clear
 #	Lead Author: Lee Hodson
 #	Donate: https://paypal.me/vr51
 #	Website: https://journalxtra.com/gaming/mame-qmc2-installer/
-#	This Release: 2nd April. 2018
+#	This Release: 12th Dec. 2021
 #	First Written: 27th Feb. 2018
 #	First Release: 27th Feb. 2018
 #
@@ -29,7 +30,7 @@ clear
 #
 #	1) Install/Update MAME from source (includes tools)
 #	2) Install/Update QMC2 from source (includes QMC2, QMC2 Arcade, QCHDMAN and the man help pages)
-#	3) Update MAME default data files: artwork, bgfx, ctrlr, hash, keymaps, language, plugins, roms and samples.
+#	3) Update MAME default data files: artwork, bgfx, ctrlr, hash, ini, keymaps, language, plugins, roms and samples.
 #	4) Create default output data directories: cfg, nvram, memcard, inp, sta, snap, diff and comments
 #	5) Delete, or not, stale files before new files are downloaded. Option set affects only actions committed.
 #	6) Set the number of parallel jobs make should use during build process.
@@ -281,7 +282,7 @@ function oneup_prompt() {
 			
 			# Build MAME
 			cd "$HOME/src/mame"
-			make $jobs TOOLS=1
+			make $jobs REGENIE=1 TOOLS=1 NOWERROR=1 ARCHOPTS=-U_FORTIFY_SOURCE
 
 			# Install MAME
 			if test -f "$HOME/src/mame/mame64"; then
@@ -413,16 +414,24 @@ function oneup_prompt() {
 
 			# Copy data files to where needed
 			unset files
-			files=( artwork bgfx ctrlr hash keymaps language plugins roms samples )
+			files=( artwork bgfx ctrlr hash ini keymaps language plugins roms samples )
 			for i in "${files[@]}"; do
 				cp -f -R "$HOME/src/mame/$i" "$HOME/.mame/"
+				
+				if test ! -d "$mamesearchpath/$i"; then
+					sudo mkdir -p "$mamesearchpath/$i"
+				fi
 				sudo cp -f -R "$HOME/src/mame/$i" "$mamesearchpath/"
+				
+				if test ! -d "$mamesearchpath2/$i"; then
+					sudo mkdir -p "$mamesearchpath2/$i"
+				fi
 				sudo cp -f -R "$HOME/src/mame/$i" "$mamesearchpath2/"
 			done
 
 			sudo cp -f -R "$HOME/src/mame/ini/presets" "/etc/mame/"
 
-			printf "\nMAME basic data files have been copied to $HOME/.mame\n"
+			printf "\nMAME basic data files have been copied to $HOME/.mame, to $mamesearchpath and to $mamesearchpath2\n"
 			printf "\nPress ANY key\n"
 			read something
 			clear
@@ -502,7 +511,7 @@ function oneup_prompt() {
 		7) # Install software packages necessary to build MAME and QMC2
 
 			sudo apt-get update
-			packages=( build-essential subversion g++ libqtwebkit-dev libphonon-dev libxmu-dev rsync libfontconfig-dev libsdl2* libqt5* qt5* )
+			packages=( build-essential git subversion python g++ libqt5webkit5 libqt5xmlpatterns5 libqtwebkit-dev libphonon-dev libxmu-dev rsync libfontconfig-dev libsdl2* libpulse-dev libqt5* qt5* )
 			for i in "${packages[@]}"; do
 				sudo apt-get build-dep -y -q $i
 				sudo apt-get install -y -q --install-suggests $i
